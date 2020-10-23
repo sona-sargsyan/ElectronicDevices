@@ -2,7 +2,7 @@ package com.company.electronicdevices;
 
 import com.company.exceptions.UnpluggedDeviceException;
 
-public class ElectronicDevice implements Comparable<ElectronicDevice> {
+public class ElectronicDevice implements Device, Comparable<ElectronicDevice> {
     private boolean isPowerOn;
     private int power;
 
@@ -23,15 +23,16 @@ public class ElectronicDevice implements Comparable<ElectronicDevice> {
         this.setIsPowerOn(true);
     }
 
+    @Deprecated
     public void switchPowerOff() {
         this.setIsPowerOn(false);
     }
 
     public boolean isPowerOn() {
-        if (this.isPowerOn == false){
+        if (!this.isPowerOn){
             throw new UnpluggedDeviceException("Device is unplugged");
         }
-        return isPowerOn;
+        return true;
     }
 
     public final void setIsPowerOn(boolean isPowerOn) {
@@ -42,4 +43,5 @@ public class ElectronicDevice implements Comparable<ElectronicDevice> {
     public int compareTo(ElectronicDevice device) {
         return this.getPower() - device.getPower();
     }
+
 }
